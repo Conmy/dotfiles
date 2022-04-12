@@ -1,0 +1,25 @@
+[user]
+	name = David Conmy
+	email = david.conmy@sap.com
+[alias]
+	graph = log --oneline --decorate --graph
+	last = log -1 HEAD
+	untrack = update-index --skip-worktree
+	track = update-index --no-skip-worktree
+	glog = log --oneline --decorate --graph --all
+[core]
+	autocrlf = input
+	excludesfile = /Users/i059151/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree 2.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[pull]
+	rebase = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
