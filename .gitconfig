@@ -1,6 +1,6 @@
 [user]
 	name = David Conmy
-	email = david.conmy@sap.com
+	email = david@conmy.me
 [alias]
 	graph = log --oneline --decorate --graph
 	last = log -1 HEAD
