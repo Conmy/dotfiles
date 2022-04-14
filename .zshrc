@@ -108,6 +108,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     alias vim="nvim"
     # connect a docker container to /docker to inspect local volumes in docker
     alias dm-disk='docker run --rm -it -v /:/docker alpine:edge $@'
+elif grep -q -i 'WSL2' /proc/version ; then
+    alias vim='nvim'
+    alias dotfiles='cd ~/dotfiles'
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
