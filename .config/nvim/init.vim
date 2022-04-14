@@ -1,3 +1,6 @@
+" ==================================================================================================
+" VIM SETTINGS - changing from defaults
+" ==================================================================================================
 set ignorecase              " case insensitive 
 set mouse=v                 " middle-click paste with 
 set hlsearch                " highlight search 
@@ -21,6 +24,9 @@ set spell                   " enable spell check (may need to download language 
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
 
+" ==================================================================================================
+" INSTALL PLUGINS SECTION
+" ==================================================================================================
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
   " Plugins Section
   Plug 'dracula/vim' " Dracula theme
@@ -31,6 +37,9 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
   Plug 'preservim/nerdcommenter' " comment toggle lines
   Plug 'mhinz/vim-startify' " start page with customizations
   Plug 'neoclide/coc.nvim', {'branch': 'release'} " Code completion engine for nvim
+  Plug 'lukas-reineke/indent-blankline.nvim' " Show indent guides 
+  Plug 'airblade/vim-gitgutter' " show git changes in the gutter
+  Plug 'mg979/vim-visual-multi' " multiple cursors
 call plug#end()
 
 " color schemes
@@ -47,17 +56,16 @@ colorscheme dracula
 set splitright
 set splitbelow
 
+" ==================================================================================================
+" KEYBOARD SHORTCUTS
+" ==================================================================================================
+
 " move line or visually selected block - alt+j/k
+" NOTE: will have problems in tmux if there is conflicting bindings
 inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
-
-" move split panes to left/bottom/top/right
-nnoremap <A-h> <C-W>H
-nnoremap <A-j> <C-W>J
-nnoremap <A-k> <C-W>K
-nnoremap <A-l> <C-W>L
 
 " move between panes to left/bottom/top/right
 nnoremap <C-h> <C-w>h
@@ -72,7 +80,9 @@ nnoremap <C-l> <C-w>l
 :vnoremap jk <Esc>
 :vnoremap kj <Esc>
 
+" ==================================================================================================
 " NERD Commenter settings
+" ==================================================================================================
 
 let g:NERDCreateDefaultMappings = 1 " Create default mappings
 let g:NERDSpaceDelims = 1 " Add spaces after comment delimiters
@@ -82,6 +92,13 @@ let g:NERDCommentEmptyLines = 1 " Comment empty lines by default when commenting
 let g:NERDTrimTrailingWhitespace = 1 " trim trailing white-space when uncommenting a line
 let g:NERDToggleCheckAllLines = 1 " Check all selected lines separately if they are commented or not.
 
+" ==================================================================================================
 " NERDTree Configuration
+" ==================================================================================================
 
+nnoremap <silent> <leader>b :NERDTreeToggle<CR>
+augroup nertree_open
+    autocmd!
+    autocmd VimEnter * NERDTree | wincmd p
+augroup END
 
