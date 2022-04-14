@@ -10,7 +10,10 @@ fi
 
 # Path to your oh-my-zsh installation.
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  export ZSH="/Users/i059151/.oh-my-zsh"
+    export ZSH="/Users/i059151/.oh-my-zsh"
+elif grep -q -i 'WSL2' /proc/version ; then
+    # WSL Linux on Windows
+    export ZSH="$HOME/.oh-my-zsh"
 fi
 
 # Set name of the theme to load --- if set to "random", it will
