@@ -6,10 +6,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$PATH
+#export PATH=$HOME/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/i059151/.oh-my-zsh"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export ZSH="/Users/i059151/.oh-my-zsh"
+fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -76,116 +78,81 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-
-plugins=(git vi-mode)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+export EDITOR='vim'
 
-# export MANPATH="/usr/local/man:$MANPATH"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export NEO_SDK="/Users/i059151/dev/neo-web-sdk/neo-java-web-sdk-3.124.9.3/tools"
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+    MY_JAVA_BIN="/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home/bin"
+    XSA_CLI_PATH="/Users/i059151/dev/bin/xs/bin"
+    export PATH=$XSA_CLI_PATH:$MY_JAVA_BIN:$NEO_SDK:$JAVA_HOME:$PATH
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-
-export NEO_SDK="/Users/i059151/dev/neo-web-sdk/neo-java-web-sdk-3.124.9.3/tools"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home"
-
-MY_JAVA_BIN="/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home/bin"
-XSA_CLI_PATH="/Users/i059151/dev/bin/xs/bin"
-export PATH=$XSA_CLI_PATH:$MY_JAVA_BIN:$NEO_SDK:$JAVA_HOME:$PATH
-
-export MAVEN_BIN=/Users/i059151/dev/bin/apache-maven-3.6.3/bin
-export PATH=$MAVEN_BIN:$PATH
+    export MAVEN_BIN=/Users/i059151/dev/bin/apache-maven-3.6.3/bin
+    export PATH=$MAVEN_BIN:$PATH
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-eval "$(rbenv init -)"
 
-export PASSWD='gSdS8>%VxDrED}R5cr#,)>xL'
-
-# Currently have no installs for java 14 or 11
-# alias j14="export JAVA_HOME=`/usr/libexec/java_home -v 14`; java -version"
-# alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
-#alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`"
-#j8
-
-export PATH=/Users/i059151/dev/bin/:$PATH
-
-#alias kupdate='kubernikusctl auth init --username I059151 --user-domain-name monsoon3 --project-id a0a468d09734431eb49d001dc2f79a3d --auth-url https://identity-3.eu-nl-1.cloud.sap/v3 --url https://kubernikus.eu-nl-1.cloud.sap --name hana-rug'
-
-# connect a docker container to /docker to inspect local volumes in docker
-alias dm-disk='docker run --rm -it -v /:/docker alpine:edge $@'
-
-# Allow the use of xpush from a command line
-if [ -f /Users/i059151/git/Projects/SportsOne/xpush/xpush.sh ];  then
-    source /Users/i059151/git/Projects/SportsOne/xpush/xpush.sh
-fi
-
-# add sbin to the path
-export PATH="/usr/local/sbin:$PATH"
-
-#export PYTHONPATH=/Users/i059151/opt/anaconda3/lib/python3.8/site-packages
-alias path="echo $PATH | tr : '\n'"
-
-# Initialize pyenv in the terminal
-eval "$(pyenv init -)"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/i059151/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/i059151/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/i059151/opt/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/i059151/opt/anaconda3/bin:$PATH"
+# OS Specific setup
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export PASSWD='gSdS8>%VxDrED}R5cr#,)>xL'
+    # Allow the use of xpush from a command line
+    if [ -f /Users/i059151/git/Projects/SportsOne/xpush/xpush.sh ];  then
+        source /Users/i059151/git/Projects/SportsOne/xpush/xpush.sh
     fi
+
+    export PATH=/Users/i059151/dev/bin/:$PATH
+    # add sbin to the path
+    export PATH="/usr/local/sbin:$PATH"
+
+    #export PYTHONPATH=/Users/i059151/opt/anaconda3/lib/python3.8/site-packages
+    alias path="echo $PATH | tr : '\n'"
+
+    # Initialize pyenv in the terminal
+    eval "$(pyenv init -)"
+
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/Users/i059151/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/Users/i059151/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+            . "/Users/i059151/opt/anaconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/Users/i059151/opt/anaconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+
+    # Deactivates Conda before running brew and then re-activate it
+    brew () {
+        local conda_env="$CONDA_DEFAULT_ENV"
+        while [ "$CONDA_SHLVL" -gt 0 ]; do
+          conda deactivate
+        done
+        command brew $@
+        local brew_status=$?
+        [ -n "$conda_env:+x" ] && conda activate "$conda_env"
+        return "$brew_status"
+    }
+
+    alias notes="cd ~/Documents/vaults/notes"
+    alias plc="cd ~/git/Projects/PLC"
+    alias jenkins-library="cd ~/git/Projects/SAP/jenkins-library"
+    alias piper-library="cd ~/git/Projects/ContinuousDelivery/piper-library"
+    alias vim="nvim"
+    # connect a docker container to /docker to inspect local volumes in docker
+    alias dm-disk='docker run --rm -it -v /:/docker alpine:edge $@'
 fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
-# Deactivates Conda before running brew and then re-activates it
-brew () {
-   local conda_env="$CONDA_DEFAULT_ENV"
-   while [ "$CONDA_SHLVL" -gt 0 ]; do
-       conda deactivate
-   done
-   command brew $@
-   local brew_status=$?
-   [ -n "$conda_env:+x" ] && conda activate "$conda_env"
-   return "$brew_status"
-}
-
-
-alias notes="cd ~/Documents/vaults/notes"
-alias plc="cd ~/git/Projects/PLC"
-alias jenkins-library="cd ~/git/Projects/SAP/jenkins-library"
-alias piper-library="cd ~/git/Projects/ContinuousDelivery/piper-library"
-alias vim="nvim"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
