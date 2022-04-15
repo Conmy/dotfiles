@@ -10,6 +10,7 @@
 	ac = !git add . && git commit
 	acm = !git add . && git commit -m
 	s = status
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     
 [core]
 	autocrlf = input
