@@ -19,4 +19,12 @@ clone the repository and symlink the files to their respective locations
 2. Symlink the tmux configuration files
     `ln -nsf dotfiles/.tmux.conf $HOME/.tmux.conf`
 
+## Git
+
+1. Install git
+    `sudo apt install git`
+2. Symlink the `.gitconfig` file to the $HOME directory
+
+> :blue_book: It is easier to configure the gitconfig via `git config --global` commands
+> if not, you have to ensure you use tabs.
 
