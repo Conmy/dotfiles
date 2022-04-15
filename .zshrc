@@ -7,7 +7,10 @@ fi
 
 # Path to your oh-my-zsh installation.
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  export ZSH="/Users/i059151/.oh-my-zsh"
+    export ZSH="/Users/i059151/.oh-my-zsh"
+elif grep -q -i 'WSL2' /proc/version ; then
+    # WSL Linux on Windows
+    export ZSH="$HOME/.oh-my-zsh"
 fi
 
 # Set name of the theme to load --- if set to "random", it will
@@ -105,6 +108,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     alias vim="nvim"
     # connect a docker container to /docker to inspect local volumes in docker
     alias dm-disk='docker run --rm -it -v /:/docker alpine:edge $@'
+elif grep -q -i 'WSL2' /proc/version ; then
+    alias vim='nvim'
+    alias dotfiles='cd ~/dotfiles'
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
