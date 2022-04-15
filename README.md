@@ -4,6 +4,11 @@ clone the repository and symlink the files to their respective locations
 
 # Setup
 
+WIP: Use the link-all.sh script to symbolically link all configuration docs.
+(not currently working)
+
+Individual instructions included below
+
 ## NeoVim
 
 1. Install NeoVim
