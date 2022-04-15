@@ -108,6 +108,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     alias vim="nvim"
     # connect a docker container to /docker to inspect local volumes in docker
     alias dm-disk='docker run --rm -it -v /:/docker alpine:edge $@'
+    alias dotfiles='cd ~/git/personal/dotfiles'
 elif grep -q -i 'WSL2' /proc/version ; then
     alias vim='nvim'
     alias dotfiles='cd ~/dotfiles'
