@@ -8,6 +8,8 @@ fi
 # Path to your oh-my-zsh installation.
 if [[ "$OSTYPE" == "darwin"* ]]; then
     export ZSH="/Users/i059151/.oh-my-zsh"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    export ZSH="$HOME/.oh-my-zsh"
 elif grep -q -i 'WSL2' /proc/version ; then
     # WSL Linux on Windows
     export ZSH="$HOME/.oh-my-zsh"
@@ -105,14 +107,20 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     alias plc="cd ~/git/Projects/PLC"
     alias jenkins-library="cd ~/git/Projects/SAP/jenkins-library"
     alias piper-library="cd ~/git/Projects/ContinuousDelivery/piper-library"
-    alias vim="nvim"
     # connect a docker container to /docker to inspect local volumes in docker
     alias dm-disk='docker run --rm -it -v /:/docker alpine:edge $@'
     alias dotfiles='cd ~/git/personal/dotfiles'
 elif grep -q -i 'WSL2' /proc/version ; then
-    alias vim='nvim'
     alias dotfiles='cd ~/dotfiles'
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    alias dotfiles='cd ~/Documents/configs/dotfiles'
 fi
+
+# ::All Environment aliases::
+alias vim='nvim'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/Documents/configs/dotfiles/src/.p10k.zsh.
+[[ ! -f ~/Documents/configs/dotfiles/src/.p10k.zsh ]] || source ~/Documents/configs/dotfiles/src/.p10k.zsh
