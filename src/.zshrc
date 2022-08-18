@@ -1,57 +1,60 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [ -z "$INTELLIJ_ENVIRONMENT_READER" ]; then
+
+    # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+    # Initialization code that may require console input (password prompts, [y/n]
+    # confirmations, etc.) must go above this block; everything else may go below.
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+        source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
+
+    # Path to your oh-my-zsh installation.
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        export ZSH="/Users/i059151/.oh-my-zsh"
+    elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        # Linux setup
+        export ZSH="$HOME/.oh-my-zsh"
+    elif grep -q -i 'WSL2' /proc/version ; then
+        # WSL Linux on Windows
+        export ZSH="$HOME/.oh-my-zsh"
+    fi
+
+    # Set name of the theme to load --- if set to "random", it will
+    # load a random theme each time oh-my-zsh is loaded, in which case,
+    # to know which specific one was loaded, run: echo $RANDOM_THEME
+    # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+    # ZSH_THEME="wedisagree"
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+
+    # Set list of themes to pick from when loading at random
+    # Setting this variable when ZSH_THEME=random will cause zsh to load
+    # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+    # If set to an empty array, this variable will have no effect.
+    # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+    HYPHEN_INSENSITIVE="true"
+    DISABLE_AUTO_TITLE="true"
+
+    # Which plugins would you like to load?
+    # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+    # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+    # Example format: plugins=(rails git textmate ruby lighthouse)
+    # Add wisely, as too many plugins slow down shell startup.
+    plugins=(git)
+
+    source $ZSH/oh-my-zsh.sh
+
+    export EDITOR='vim'
 fi
-
-# Path to your oh-my-zsh installation.
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    export ZSH="/Users/i059151/.oh-my-zsh"
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    export ZSH="$HOME/.oh-my-zsh"
-elif grep -q -i 'WSL2' /proc/version ; then
-    # WSL Linux on Windows
-    export ZSH="$HOME/.oh-my-zsh"
-fi
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="wedisagree"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-HYPHEN_INSENSITIVE="true"
-DISABLE_AUTO_TITLE="true"
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-export EDITOR='vim'
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     export NEO_SDK="/Users/i059151/dev/neo-web-sdk/neo-java-web-sdk-3.124.9.3/tools"
     export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home"
+    export MAVEN_BIN="/Users/i059151/dev/bin/apache-maven-3.6.3/bin"
 
     MY_JAVA_BIN="/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home/bin"
     XSA_CLI_PATH="/Users/i059151/dev/bin/xs/bin"
-    export PATH=$XSA_CLI_PATH:$MY_JAVA_BIN:$NEO_SDK:$JAVA_HOME:$PATH
 
-    export MAVEN_BIN=/Users/i059151/dev/bin/apache-maven-3.6.3/bin
-    export PATH=$MAVEN_BIN:$PATH
+    export PATH=$MAVEN_BIN:$XSA_CLI_PATH:$MY_JAVA_BIN:$NEO_SDK:$JAVA_HOME:$PATH
 fi
 
 export NVM_DIR="$HOME/.nvm"
@@ -60,6 +63,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # OS Specific setup
 if [[ "$OSTYPE" == "darwin"* ]]; then
+    # MacOS
     export PASSWD='gSdS8>%VxDrED}R5cr#,)>xL'
     # Allow the use of xpush from a command line
     if [ -f /Users/i059151/git/Projects/SportsOne/xpush/xpush.sh ];  then
@@ -103,8 +107,20 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         return "$brew_status"
     }
 
+    # To customize prompt, run `p10k configure` or edit ~/Documents/configs/dotfiles/src/.p10k.zsh.
+    [[ ! -f ~/Documents/configs/dotfiles/src/.p10k.zsh ]] || source ~/Documents/configs/dotfiles/src/.p10k.zsh
+
+    # Ruby setup.
+    source /usr/local/opt/chruby/share/chruby/chruby.sh
+    source /usr/local/opt/chruby/share/chruby/auto.sh
+    # chruby ruby-3.1.1
+
+    # Set to the most used version of node to use.
+    nvm use --silent lts/fermium
+
     alias notes="cd ~/Documents/vaults/notes"
     alias plc="cd ~/git/Projects/PLC"
+    alias euipo="cd ~/git/Projects/EUIPO"
     alias jenkins-library="cd ~/git/Projects/SAP/jenkins-library"
     alias piper-library="cd ~/git/Projects/ContinuousDelivery/piper-library"
     # connect a docker container to /docker to inspect local volumes in docker
@@ -119,8 +135,7 @@ fi
 # ::All Environment aliases::
 alias vim='nvim'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/Documents/configs/dotfiles/src/.p10k.zsh.
-[[ ! -f ~/Documents/configs/dotfiles/src/.p10k.zsh ]] || source ~/Documents/configs/dotfiles/src/.p10k.zsh
+if [ -z "$INTELLIJ_ENVIRONMENT_READER" ]; then
+    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
